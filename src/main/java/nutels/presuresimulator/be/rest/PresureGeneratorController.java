@@ -5,6 +5,7 @@ import nutels.presuresimulator.be.models.GeneratedPresure;
 import nutels.presuresimulator.be.service.GeneratedPresureService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.ApplicationContext;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,16 +17,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class PresureGeneratorController {
 
+    private final ApplicationContext context;
 
-    private final GeneratedPresureService presureObj;
     @Autowired
-    public PresureGeneratorController(GeneratedPresureService presureObj) {this.presureObj = presureObj;}
+    public PresureGeneratorController(ApplicationContext context) {
+        this.context = context;
+    }
 
     @CrossOrigin(origins = "http://localhost:4200")
     @RequestMapping(value = APIv1.API_URL_PRESURE_GENERATOR, method = RequestMethod.GET)
     public HttpEntity <GeneratedPresure> getGeneratedPresure(){
 
-        GeneratedPresure result = (GeneratedPresure) presureObj;
+        GeneratedPresure result = context.getBean(GeneratedPresure.class);
         return ResponseEntity
                 .status((result != null) ? HttpStatus.OK : HttpStatus.NOT_FOUND)
                 .body(result);
