@@ -56,7 +56,7 @@ public class Measurement {
 
     //getters
     public String getDate() {
-        SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yy HH:mm");
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yy (HH:mm)");
         return formatter.format(date);
     }
 
