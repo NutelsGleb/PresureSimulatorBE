@@ -27,7 +27,6 @@ public class PresureGeneratorController {
         this.context = context;
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
     @RequestMapping(value = APIv1.API_URL_PRESURE_GENERATOR, method = RequestMethod.GET)
     @Operation
     public HttpEntity <GeneratedPresure> getGeneratedPresure(){

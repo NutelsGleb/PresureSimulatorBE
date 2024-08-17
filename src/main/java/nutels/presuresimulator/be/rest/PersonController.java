@@ -28,7 +28,6 @@ public class PersonController {
     }
 
     //Get all persons
-    @CrossOrigin(origins = "http://localhost:4200")
     @RequestMapping(value = APIv1.API_URL_PERSONS, method = RequestMethod.GET)
     @Operation(summary = "getPeople")
     public HttpEntity<Iterable<Person>> getPeople() {
@@ -40,7 +39,6 @@ public class PersonController {
     }
 
     //Post new person
-    @CrossOrigin(origins = "http://localhost:4200")
     @RequestMapping(value = APIv1.API_URL_PERSON, method = RequestMethod.POST)
     @Operation
     public HttpEntity<Object> createPerson(@RequestBody Person person) {
@@ -58,7 +56,6 @@ public class PersonController {
     }
 
     //Get person by id
-    @CrossOrigin(origins = "http://localhost:4200")
     @RequestMapping(value = APIv1.API_URL_PERSON + "/{id}", method = RequestMethod.GET)
     @Operation
     public ResponseEntity<Optional<Person>> getPerson(@PathVariable Long id) {
@@ -69,7 +66,6 @@ public class PersonController {
     }
 
     //Delete person by id
-    @CrossOrigin(origins = "http://localhost:4200")
     @RequestMapping(value = APIv1.API_URL_PERSON+ "/{id}", method = RequestMethod.DELETE)
     @Operation
     public HttpEntity<String> deletePerson(@PathVariable Long id) {

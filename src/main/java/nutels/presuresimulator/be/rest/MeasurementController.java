@@ -31,7 +31,6 @@ public class MeasurementController {
     }
 
     //Get measurments by personId
-    @CrossOrigin(origins = "http://localhost:4200")
     @RequestMapping(value = APIv1.API_URL_MEASUREMENTS +"/{personId}", method = RequestMethod.GET)
     @Operation
     public HttpEntity<Iterable<Measurement>> getPersonMeasurements(@PathVariable Long personId) {
@@ -42,7 +41,6 @@ public class MeasurementController {
     }
 
     //Post new measurement
-    @CrossOrigin(origins = "http://localhost:4200")
     @RequestMapping(value = APIv1.API_URL_MEASUREMENT +"/{personId}", method = RequestMethod.POST)
     @Operation
     public HttpEntity<Object> createMeasurement(@RequestBody Measurement measurement, @PathVariable Long personId) {
@@ -61,7 +59,6 @@ public class MeasurementController {
     }
 
     //delete all measurements for person
-    @CrossOrigin(origins = "http://localhost:4200")
     @RequestMapping(value = APIv1.API_URL_MEASUREMENTS +"/{personId}", method = RequestMethod.DELETE)
     @Operation
     public HttpEntity<String> deleteMeasurementsForPerson(@PathVariable Long personId) {
