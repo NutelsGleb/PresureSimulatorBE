@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+
+  presuredb:
+    image: postgres:16.2
+    restart: on-failure
+    environment:
+      POSTGRES_DB: presure
+      POSTGRES_USER: gleb
+      POSTGRES_PASSWORD: gleb
+    ports: 
+      - 5432:5432
+
+  presurebe:
+    build: ./
+    ports: 
+      - 8088:8088
+    restart: on-failure
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://presuredb:5432/presure?currentSchema=public
+      SPRING_DATASOURCE_USERNAME: gleb
+      SPRING_DATASOURCE_PASSWORD: gleb
+      CORS_ALLOWED_ORIGINS: http://localhost
+    depends_on:
+      - presuredb
+
+  presurefe:
+    build: ../PresureSimulatorFE
+    ports: 
+      - 80:80
+    depends_on:
+      - presuredb
+      - presurebe

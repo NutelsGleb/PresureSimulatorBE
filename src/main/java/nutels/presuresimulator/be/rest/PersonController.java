@@ -13,9 +13,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
-
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 @Controller
+@Tag(name = "Person controller")
 public class PersonController {
 
     private final PersonService personService;
@@ -26,8 +28,8 @@ public class PersonController {
     }
 
     //Get all persons
-    @CrossOrigin(origins = "http://localhost:4200")
     @RequestMapping(value = APIv1.API_URL_PERSONS, method = RequestMethod.GET)
+    @Operation(summary = "getPeople")
     public HttpEntity<Iterable<Person>> getPeople() {
 
         Iterable<Person> result = personService.getAllPersons();
@@ -37,8 +39,8 @@ public class PersonController {
     }
 
     //Post new person
-    @CrossOrigin(origins = "http://localhost:4200")
     @RequestMapping(value = APIv1.API_URL_PERSON, method = RequestMethod.POST)
+    @Operation
     public HttpEntity<Object> createPerson(@RequestBody Person person) {
         Iterable<Person> listOfPersons = personService.getAllPersons();
         for (Person existingPerson : listOfPersons) {
@@ -54,8 +56,8 @@ public class PersonController {
     }
 
     //Get person by id
-    @CrossOrigin(origins = "http://localhost:4200")
     @RequestMapping(value = APIv1.API_URL_PERSON + "/{id}", method = RequestMethod.GET)
+    @Operation
     public ResponseEntity<Optional<Person>> getPerson(@PathVariable Long id) {
         Optional<Person> result = personService.getPersonById(id);
         return ResponseEntity
@@ -64,8 +66,8 @@ public class PersonController {
     }
 
     //Delete person by id
-    @CrossOrigin(origins = "http://localhost:4200")
     @RequestMapping(value = APIv1.API_URL_PERSON+ "/{id}", method = RequestMethod.DELETE)
+    @Operation
     public HttpEntity<String> deletePerson(@PathVariable Long id) {
         System.out.println("deleted Person ID: " + id);
         personService.deletePerson(id);

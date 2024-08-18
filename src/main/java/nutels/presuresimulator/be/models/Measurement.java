@@ -1,4 +1,5 @@
 package nutels.presuresimulator.be.models;
+import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.util.Date;
 
@@ -12,9 +13,9 @@ public class Measurement {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private double upperPresure;
-    private double bottomPresure;
-    private double pulse;
+    private double systolicPressure;
+    private double diastolicPressure;
+    private double heartRate;
     private Date date;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -33,16 +34,16 @@ public class Measurement {
         this.id = id;
     }
 
-    public void setUpperPresure(double upperPresure) {
-        this.upperPresure = upperPresure;
+    public void setSystolicPressure(double systolicPressure) {
+        this.systolicPressure = systolicPressure;
     }
 
-    public void setBottomPresure(double bottomPresure) {
-        this.bottomPresure = bottomPresure;
+    public void setDiastolicPressure(double diastolicPressure) {
+        this.diastolicPressure = diastolicPressure;
     }
 
-    public void setPulse(double pulse) {
-        this.pulse = pulse;
+    public void setHeartRate(double heartRate) {
+        this.heartRate = heartRate;
     }
 
     public void setDate(Date date) {
@@ -54,20 +55,21 @@ public class Measurement {
 
 
     //getters
-    public Date getDate() {
-        return date;
+    public String getDate() {
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yy (HH:mm)");
+        return formatter.format(date);
     }
 
-    public double getPulse() {
-        return pulse;
+    public double getHeartRate() {
+        return heartRate;
     }
 
-    public double getBottomPresure() {
-        return bottomPresure;
+    public double getDiastolicPressure() {
+        return diastolicPressure;
     }
 
-    public double getUpperPresure() {
-        return upperPresure;
+    public double getSystolicPressure() {
+        return systolicPressure;
     }
 
     public Long getId() {
